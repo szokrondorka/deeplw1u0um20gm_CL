@@ -76,6 +76,43 @@ class trainTutorial(Trainer):
                     batch = next(current_train_loader_iterator)
 
                 batch_results = self.train_on_batch(batch)
+                
+                if results_to_log is None:
+                    results_to_log = batch_results.copy()
+                else:
+                    for metric, result in batch_results.items():
+                        results_to_log[metric] += result.data
+
+                if (self.global_iters % self.log_interval == 0):
+                    self.lr_scheduler.step()
+                    neptune.send_metric('learning_rate',
+                                        x=self.global_iters,
+                                        y=self.optimizer.param_groups[0]['lr'])
+
+                    if self.logdir is not None:
+                        save_image(batch[0][:self.batch_size, :, :, :],
+                                   name='train_images',
+                                   iteration=self.global_iters,
+                                   filename=os.path.join(self.logdir, 'train_images.png'))
+
+                    results_to_log = {'train_' + key: value / self.log_interval
+                                      for key, value in results_to_log.items()}
+
+                    template = ("Task {}/{}x{}\tTrain\tglobal iter: {}, batch: {}/{}, metrics:  "
+                                + "".join([key + ": {:.3f}  " for key in results_to_log.keys()]))
+                    print(template.format(self.current_task + 1,
+                                          self.num_tasks,
+                                          self.num_cycles,
+                                          self.global_iters,
+                                          self.iter_count,
+                                          self.iters_per_task,
+                                          *[item.data for item in results_to_log.values()]))
+
+                    for metric, result in results_to_log.items():
+                        neptune.send_metric(metric, x=self.global_iters, y=result)
+
+                    results_to_log = None
+                    self.test()
     
 
         
