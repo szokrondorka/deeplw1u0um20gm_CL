@@ -12,11 +12,12 @@ if torch.cuda.is_available() is False:
 print(f"Using GPU device: {torch.cuda.get_device_name(torch.cuda.current_device())}")
 
 # Hyper parameters
-num_epochs = 5
-num_classes = 10
-batch_size = 100
-learning_rate = 0.001
 datadir = "/home/szokron/deeplw1u0um20gm_CL/data/"
+batch_size = 100
+num_tasks = 5
+num_cycles = 1
+learning_rate = 0.001
+
 
 # MNIST dataset
 # Data loader
