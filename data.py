@@ -15,12 +15,7 @@ class Data_MNIST:
 
         self._setup()
 
-
-    @property
-    def loaders(self):
-        return {'train_loaders': self.train_loaders, 'test_loaders': self.test_loaders}
-
-
+            
     def _setup(self):
         self._get_dataset()
         self._create_tasks()
