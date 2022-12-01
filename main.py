@@ -23,7 +23,7 @@ learning_rate = 0.001
 # Data loader
 # data.py
 
-data = data.Data_MNIST(datadir)
+data = data.Data_MNIST(datadir, batch_size, num_tasks, num_cycles)
 
 # Convolutional neural network (two convolutional layers)
 # models.py
