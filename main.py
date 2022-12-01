@@ -22,7 +22,7 @@ datadir = "/home/szokron/deeplw1u0um20gm_CL/data/"
 # Data loader
 # data.py
 
-data = data.Data(datadir)
+data = data.Data_MNIST(datadir)
 
 # Convolutional neural network (two convolutional layers)
 # models.py
