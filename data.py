@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 from torch.utils.data.dataloader import default_collate
-from torchvision import datasets, transforms as tfs
+from torchvision import datasets, transforms
 
 
 class Data_MNIST:
