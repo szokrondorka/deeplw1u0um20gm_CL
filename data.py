@@ -88,14 +88,12 @@ class Data_MNIST:
             self.train_loaders.append(torch.utils.data.DataLoader(ds,
                                                                   batch_size=self.batch_size,
                                                                   shuffle=True,
-                                                                  collate_fn=_collate_func,
-                                                                  **self.dataloader_kwargs))
+                                                                  collate_fn=_collate_func))
         for ds in self.test_task_datasets:
             self.test_loaders.append(torch.utils.data.DataLoader(ds,
                                                                  batch_size=self.batch_size,
                                                                  shuffle=True,
-                                                                 collate_fn=_collate_func,
-                                                                 **self.dataloader_kwargs))
+                                                                 collate_fn=_collate_func))
         self.train_loaders = self.train_loaders * self.num_cycles
         self.test_loaders = self.test_loaders * self.num_cycles
 
