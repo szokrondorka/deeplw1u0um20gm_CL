@@ -17,7 +17,7 @@ batch_size = 100
 num_tasks = 5
 num_cycles = 1
 learning_rate = 0.001
-
+num_epochs = 50
 
 # MNIST dataset
 # Data loader
