@@ -9,6 +9,7 @@ import models
 # Device configuration
 if torch.cuda.is_available() is False:
     raise Exception("GPU device not found, runtime environment should be set to GPU")
+device = torch.cuda.current_device()
 print(f"Using GPU device: {torch.cuda.get_device_name(torch.cuda.current_device())}")
 
 # Hyper parameters
