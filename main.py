@@ -35,7 +35,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
 # Train the model
-for i in range(0,5):
+for i in range(0,num_tasks):
   total_step = len(train_loader[i])
   for epoch in range(num_epochs):
       for j, (images, labels) in enumerate(train_loader[i]):
