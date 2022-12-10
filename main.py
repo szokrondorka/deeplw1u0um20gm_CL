@@ -86,6 +86,7 @@ for i in range(0,num_tasks):
       # Test the model
       model.eval()  # eval mode (batchnorm uses moving mean/variance instead of mini-batch mean/variance)
       with torch.no_grad():
+          running_loss = 0
           correct = 0
           total = 0
           for images, labels in data.test_loaders[i]:
