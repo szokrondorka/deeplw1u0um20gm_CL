@@ -85,10 +85,10 @@ for i in range(0,num_tasks):
                     
       # Test the model
       model.eval()  # eval mode (batchnorm uses moving mean/variance instead of mini-batch mean/variance)
+      running_loss = 0
+      correct = 0
+      total = 0
       with torch.no_grad():
-          running_loss = 0
-          correct = 0
-          total = 0
           for images, labels in data.test_loaders[i]:
               images = images.to(device)
               labels = labels.to(device)
@@ -106,7 +106,8 @@ for i in range(0,num_tasks):
       eval_accu.append(accu)
        
       print('Test Loss: %.3f | Accuracy: %.3f'%(test_loss,accu)) 
-  
+
+ 
 plt.plot(train_accu,'-o')
 plt.plot(eval_accu,'-o')
 plt.xlabel('epoch')
@@ -124,8 +125,7 @@ plt.legend(['Train','Valid'])
 plt.title('Train vs Valid Losses')
  
 plt.savefig(datadir + 'loss.png')
-
-    
+   
 
 # Save the model checkpoint
 #torch.save(model.state_dict(), 'model.ckpt')
